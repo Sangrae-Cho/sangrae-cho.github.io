@@ -1,0 +1,103 @@
+---
+title: "[프로그래머스][python3] 이중우선순위큐"
+description: 프로그래머스|힙(heap)|이중우선순위큐|python3.
+date: 2024-11-03 04:21:00 +0900
+categories: [프로그래머스,힙]
+tags: [프로그래머스,힙,이중우선순위큐,programmers,heap,python3,heapq,python]
+pin: true
+math: true
+mermaid: true
+image: assets/img/2024-11-03-programmers-heap-이중우선순위큐/1.jpg
+---
+
+## 1. 문제 설명 및 분석
+
+이중 우선순위 큐는 다음 연산을 할 수 있는 자료구조를 말합니다.
+
+| 명령어 | 수신 탑(높이)                  |
+| ------ | ------------------------------ |
+| I 숫자 | 큐에 주어진 숫자를 삽입합니다. |
+| D 1    | 큐에서 최댓값을 삭제합니다.    |
+| D -1   | 큐에서 최솟값을 삭제합니다.    |
+
+이중 우선순위 큐가 할 연산 `operations`가 매개변수로 주어질 때, 모든 연산을 처리한 후 큐가 **비어있으면 [0,0]** 비어있지 않으면 [최댓값, 최솟값]을 return 하도록 solution 함수를 구현해주세요.
+
+>큐가 비어있을 때의 처리도 필요함.
+{: .prompt-warning }
+
+### 제한사항
+
+- `operations`는 **길이가 1 이상 1,000,000 이하**인 문자열 배열입니다.
+- `operations`의 원소는 큐가 수행할 연산을 나타냅니다.
+  - 원소는 “명령어 데이터” 형식으로 주어집니다. 최댓값/최솟값을 삭제하는 연산에서 최댓값/최솟값이 둘 이상인 경우, 하나만 삭제합니다.
+- 빈 큐에 데이터를 삭제하라는 연산이 주어질 경우, 해당 연산은 무시합니다.
+
+> 범위가 크므로 단순 반복문 사용 시 성능 저하 가능성이 있음.
+{: .prompt-warning }
+
+### 입출력 예
+
+| operations                                                                  | return     |
+| --------------------------------------------------------------------------- | ---------- |
+| ["I 16", "I -5643", "D -1", "D 1", "D 1", "I 123", "D -1"]                  | [0, 0]     |
+| ["I -45", "I 653", "D 1", "I -642", "I 45", "I 97", "D 1", "D -1", "I 333"] | [333, -45] |
+
+> 명령어가 문자열로 제공됨.
+{: .prompt-warning }
+
+## 2. 문제 해결
+
+### 사고 과정
+
+- `python`의 `heapq`를 이용해 `heap`을 만들어준다.
+- `"I 숫자"` 명령 → `heap.heappush(heap, 숫자)`로 숫자를 삽입.
+- `"D -1"` 명령 → `heap.heappop(heap)`으로 최솟값을 제거.
+- `"D 1"` 명령 → `heapq`는 **최소힙** 구조이므로 아래와 같은 방식으로 **최대힙**을 구현할 수 있다.
+
+```python
+import heapq
+
+heap = [1, 2, 5, 4, 9, 6, 7] # 가장 큰 수는 9 이지만 현 상태에선 추출이 불가함.
+heap = [-i for i in heap] # 부호를 바꾸어 최대 힙처럼 동작하도록 유도
+heapq.heapify(heap)
+max_number = -heapq.heappop(heap) # -9가 최솟값으로 추출되며, 다시 부호를 반전하여 최댓값을 얻음
+print(max_number)  # 출력: 9
+```
+
+- 즉, 최소 힙과 최대 힙 두 개를 유지해야 하며, 명령에 따라 삽입 및 삭제 시 두 힙 간 **동기화 작업**이 필요.
+- 모든 명령을 수행한 후, 두 힙에서 최댓값과 최솟값을 추출. 만약 힙이 비어있다면 **[0, 0]**을 반환.
+
+### 코드 작성
+
+```python
+import heapq
+
+
+def solution(operations):
+    min_heap = []
+    max_heap = []
+
+    while operations:
+        operation = operations.pop(0)
+        [sign, number] = operation.split(' ')
+
+        if sign == 'I':
+            heapq.heappush(min_heap, int(number))
+            heapq.heappush(max_heap, -int(number)) # 최대힙에는 부호를 변경해서 삽입
+        elif sign == 'D' and number == '1' and max_heap:
+            max_number = heapq.heappop(max_heap)
+            del min_heap[min_heap.index(-max_number)] # 두 힙 간의 동기화 작업
+        elif sign == 'D' and number == '-1' and min_heap:
+            min_number = heapq.heappop(min_heap)
+            del max_heap[max_heap.index(-min_number)] # 두 힙 간의 동기화 작업
+
+    return [-heapq.heappop(max_heap), heapq.heappop(min_heap)] if min_heap else [0, 0]
+```
+
+### 제출 결과
+
+![Desktop View](/assets/img/2024-11-03-programmers-heap-이중우선순위큐/2.jpg){: width="600" .w-50}
+
+## 3. 회고
+
+- 테스트 7번에서 효율성 문제가 발생함. 두 힙의 동기화 과정에서 성능 저하가 예상되며, 이를 개선할 필요가 있다.
