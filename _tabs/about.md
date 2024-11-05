@@ -4,5 +4,7 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-> Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
-{: .prompt-tip }
+| 기간              | 회사명 및 교육명 | 구분 | 상태 |
+| ----------------- | ---------------- | ---- | ---- |
+| 2021.06 - 2024.07 | 코코넛사일로(주) | 회사 | 퇴사 |
+| 2020.12 - 2021.04 | 코드스테이츠     | 교육 | 수료 |
