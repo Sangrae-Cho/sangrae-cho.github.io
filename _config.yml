@@ -16,7 +16,7 @@ timezone: Asia/Seoul
 
 title: 조상래 # the main title
 
-tagline: 백엔드 개발자 # it will display as the subtitle
+tagline: "즐거워요! 재밌어요!" # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
   node,node.js,programmers,algorithm,javascript,js,typescript,ts,express.js,nest.js,python3,python
