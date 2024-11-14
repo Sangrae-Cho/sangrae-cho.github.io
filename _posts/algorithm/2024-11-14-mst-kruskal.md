@@ -1,7 +1,7 @@
 ---
 title: "[알고리즘][최소 신장 트리(MST)] 크루스칼(Kruskal) 알고리즘"
 description: 알고리즘|최소 신장 트리(MST)|크루스칼(Kruskal) 알고리즘
-date: 2024-11-14 19:00:00 +0900
+date: 2024-11-14 19:10:00 +0900
 categories: [알고리즘, 최소 신장 트리(MST)]
 tags: [알고리즘,최소신장트리,크루스칼,Algorithm,MST,MinimumSpanningTree,Kruskal]
 pin: false
