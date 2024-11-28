@@ -1,7 +1,7 @@
 ---
 title: "[AWS][계정 분산 관리] 5. Switch Role 활용: 통합 콘솔 관리(完)"
 description: AWS|계정 분산 관리|Switch Role|통합 콘솔 관리
-date: 2024-11-27 20:00:00 +0900
+date: 2024-11-28 12:00:00 +0900
 categories: [AWS, 계정 분산 관리]
 tags: [AWS,계정분산관리,Switch Role]
 pin: false
@@ -9,7 +9,6 @@ math: false
 mermaid: false
 image: assets/img/aws/account-management/2024-11-28-switchrole/1.png
 ---
-
 ## **1. Switch Role**
 
 - 통합 관리 계정에서 **IAM 사용자**를 생성하고, 교차 계정 간 **Switch Role**을 통해 AWS 콘솔에 접근하도록 합니다. 이를 통해 얻을 수 있는 이점은 아래와 같습니다.  
@@ -28,7 +27,7 @@ image: assets/img/aws/account-management/2024-11-28-switchrole/1.png
 
 - 이 글에서는 **모든 권한**을 가진 구성원에게 IAM 사용자 계정을 부여한다는 가정하에 작성되었습니다.
 - IAM 사용자 계정은 프로젝트의 `ManagerRole`만으로 역할 전환을 할 수 있도록 설계했습니다. 구조는 아래와 같습니다.  
-![DesktopView](/assets/img/aws/account-management/2024-11-28-switchrole/1.png)
+![Desktop View](/assets/img/aws/account-management/2024-11-28-switchrole/1.png)
 
 ---
 
@@ -109,10 +108,10 @@ image: assets/img/aws/account-management/2024-11-28-switchrole/1.png
 ### 4. Switch Role을 통해 프로젝트 계정의 콘솔에 접근
 
 1. IAM 사용자 계정으로 로그인 후 **Switch Role** 기능에 접근합니다.  
-   ![DesktopView](/assets/img/aws/account-management/2024-11-28-switchrole/2.jpg)
+   ![Desktop View](/assets/img/aws/account-management/2024-11-28-switchrole/2.jpg)
 2. **프로젝트 계정의 ID**와 **ManagerRole**을 입력한 뒤, 역할을 전환합니다.  
    전환 후 프로젝트 계정의 콘솔에 정상적으로 접근이 가능한지 확인합니다.  
-   ![DesktopView](/assets/img/aws/account-management/2024-11-28-switchrole/3.jpg)
+   ![Desktop View](/assets/img/aws/account-management/2024-11-28-switchrole/3.jpg)
 
 ## 3. 주요 요약
 
