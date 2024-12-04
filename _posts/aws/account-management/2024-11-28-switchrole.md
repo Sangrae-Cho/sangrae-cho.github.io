@@ -25,6 +25,9 @@ image: assets/img/aws/account-management/2024-11-28-switchrole/1.png
   >각 계정에서 별도로 IAM 사용자를 설정하고 관리할 필요가 없어 시간과 비용을 절약할 수 있습니다.  
   >또한, 하나의 계정에서 다른 계정의 리소스에 액세스할 수 있으므로 중복된 인프라 구축을 피할 수 있습니다.  
 
+> AWS Organizations 기능을 이용하면 비용을 통합해 관리할 수 있습니다. (참고: [AWS 공식 문서 - AWS Organizations란 무엇인가요?](https://docs.aws.amazon.com/ko_kr/organizations/latest/userguide/orgs_introduction.html))
+{: .prompt-info }
+
 - 이 글에서는 **모든 권한**을 가진 구성원에게 IAM 사용자 계정을 부여한다는 가정하에 작성되었습니다.
 - IAM 사용자 계정은 프로젝트의 `ManagerRole`만으로 역할 전환을 할 수 있도록 설계했습니다. 구조는 아래와 같습니다.  
 ![Desktop View](/assets/img/aws/account-management/2024-11-28-switchrole/1.png)
@@ -119,7 +122,8 @@ image: assets/img/aws/account-management/2024-11-28-switchrole/1.png
 
 ## 4. AWS 계정 분산 관리 전략 정리
 
-이번 시리즈에서는 **VPC Peering**, **Bastion Host Server**, **NAT Server**, **Switch Role** 활용으로 AWS 환경에서 멀티 계정 및 네트워크 관리 전략 중심의 구성 방법과 접근 방식을 살펴보았습니다.
+이번 시리즈에서는 **VPC Peering**, **Bastion Host Server**, **NAT Server**, **Switch Role** 활용으로 AWS 환경에서 멀티 계정 및 네트워크 관리 전략 중심의 구성 방법과 접근 방식을 살펴보았습니다.  
+
 이번 시리즈에서 다룬 전략들이 여러분의 AWS 인프라 관리에 실질적인 도움이 되길 바랍니다.
 
 끝까지 읽어 주셔서 감사합니다!
